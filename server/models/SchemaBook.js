@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-const bookSchema = mongoose.Schema({
+const SchemaBook = mongoose.Schema({
     title: {
         type: String,
         maxLength: 50,
@@ -17,5 +17,5 @@ const bookSchema = mongoose.Schema({
     }
 })
 
-const BookSchema = mongoose.model("BookSchema",bookSchema)
-module.exports = { BookSchema }
+const SchemaBook = mongoose.model("SchemaBook", schemaBook);
+module.exports = { BookSchema };

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dailyAlgoSchema = mongoose.Schema({
+const schemaAlgo = mongoose.Schema({
     title: {
         type: String,
         maxLength: 25,
@@ -21,6 +21,5 @@ const dailyAlgoSchema = mongoose.Schema({
     }
 })
 
-const DailyAlgoSchema = mongoose.model("DailyAlgoSchema", dailyAlgoSchema)
-
-module.exports = { DailyAlgoSchema }
+const SchemaAlgo = mongoose.model("SchemaAlgo", schemaAlgo);
+module.exports = { SchemaAlgo };

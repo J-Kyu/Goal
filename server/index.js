@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
-const { DailyAlgoSchema } = require("./models/DailyAlgoSchema");
+const { SchemaAlgo } = require("./models/SchemaAlgo");
 
 //verify whether current node is running as local or prooduction mode
 const config = require("./config/key");
@@ -33,9 +33,9 @@ app.get('/', (req, res) => {
 app.post('/register', (req, res) => {
 
   console.log(req.body)
-  const dailyAlgoSchema = new DailyAlgoSchema(req.body)
+  const schemaAlgo = new SchemaAlgo(req.body)
 
-  dailyAlgoSchema.save((err, algoInfo) => {
+  schemaAlgo.save((err, algoInfo) => {
     if ( err ) return res.json({ success: false, err})
     return res.status(200).json({
       success: true

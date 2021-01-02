@@ -1,7 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 
-const weeklyCSSchema = mongoose.Schema({
+const schemaCS = mongoose.Schema({
     title: {
         type: String,
         maxLenth: 100,
@@ -19,5 +19,5 @@ const weeklyCSSchema = mongoose.Schema({
 })
 
 
-const WeeklyCSSchema = mongoose.model("WeeklyCSSchema",weeklyCSSchema)
-module.exports = { WeeklyCSSchema }
+const SchemaCS = mongoose.model("SchemaCS",schemaCS);
+module.exports = { SchemaCS };
