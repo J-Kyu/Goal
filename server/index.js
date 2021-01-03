@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 const bodyParser = require('body-parser');
 const { SchemaAlgo } = require("./models/SchemaAlgo");
 
@@ -43,6 +43,10 @@ app.post('/register', (req, res) => {
   })
 })
 
+//get router example ............ axios
+app.get('/api/hello', (req,res) => {
+  res.send("Hi Hello")
+})
 
 //listening router
 app.listen(port, () => {
