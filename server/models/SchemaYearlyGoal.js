@@ -5,8 +5,12 @@ const schemaYearlyGoal = mongoose.Schema({
         type: String,
         maxLength: 50,
         default: "This is Yearly Goal"
+    },
+    year: {
+        type: Number,
+        default: 2021
     }
 })
 
-const SchemaYearlyGoal = mongoose.model("schemaYearlyGoal". SchemaYearlyGoal)
+const SchemaYearlyGoal = mongoose.model("SchemaYearlyGoal", schemaYearlyGoal);
 module.exports = { SchemaYearlyGoal }

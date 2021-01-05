@@ -3,6 +3,7 @@ const app = express()
 const port = 5000
 const bodyParser = require('body-parser');
 const { SchemaAlgo } = require("./models/SchemaAlgo");
+const { SchemaYearlyGoal } = require("./models/SchemaYearlyGoal");
 
 //verify whether current node is running as local or prooduction mode
 const config = require("./config/key");
@@ -41,6 +42,28 @@ app.post('/register', (req, res) => {
       success: true
     })
   })
+})
+
+//post router example
+app.post('/YearlyGoalRegister', (req, res) => {
+
+  console.log(req.body)
+  const schemaYearlyGoal = new SchemaYearlyGoal(req.body)
+
+  schemaYearlyGoal.save((err, algoInfo) => {
+    if ( err ) return res.json({ success: false, err})
+    return res.status(200).json({
+      success: true
+    })
+  })
+})
+
+//get from mongoDB example
+app.get('/api/YearlyGoal/:year', (req, res) =>{
+  SchemaYearlyGoal.find({
+    year: req.params.year
+  })
+  .then(goal => res.status(200).json(goal))
 })
 
 //get router example ............ axios
