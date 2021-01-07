@@ -4,13 +4,15 @@ import axios from 'axios';
 function LandngPage() {
 
     const [title, setTitle] = useState(" ");
+    const [year, setYear] = useState(0);
 
     //componentDidMount
     useEffect(() => {
         axios.get('/api/YearlyGoal/2021')
         .then(response => {
-            console.log(response.data);
-            // setTitle(response.data);
+            // console.log(response.data[0].title);
+            setTitle(response.data[0].title);
+            setYear(response.data[0].year);
         })
     },[])
 
@@ -20,7 +22,8 @@ function LandngPage() {
             display: 'flex', justifyContent: 'center', alignItems: 'center'
             ,width: '100%', height: '100vh'
         }}>
-            <h2>This is Landing Page {title} </h2>
+            <h1>{new Date().toLocaleTimeString()}</h1>
+            <h2>{title} </h2>
         </div>
     )
 }
