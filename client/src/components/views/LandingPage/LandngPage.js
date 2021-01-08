@@ -22,8 +22,10 @@ function LandngPage() {
             display: 'flex', justifyContent: 'center', alignItems: 'center'
             ,width: '100%', height: '100vh'
         }}>
+            <label>
             <h1>{new Date().toLocaleTimeString()}</h1>
             <h2>{title} </h2>
+            </label>
         </div>
     )
 }

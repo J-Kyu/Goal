@@ -11,13 +11,11 @@ import {
   Link
 } from "react-router-dom";
 
-
-
 function App() {
   return (
     <Router>
       <div>
-        <ul>
+        {/* <ul>
           <li>
             <Link to="/">Landing Page</Link>
           </li>
@@ -27,7 +25,7 @@ function App() {
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
-        </ul>
+        </ul> */}
 
         <hr />
 
@@ -64,6 +62,7 @@ function Dashboard() {
     </div>
   );
 }
+
 
 
 
