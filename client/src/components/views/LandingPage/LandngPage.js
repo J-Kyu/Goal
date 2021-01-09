@@ -1,5 +1,11 @@
 import React,{ useEffect, useState } from 'react'
 import axios from 'axios';
+import { Typography } from 'antd';
+import  ExerciseCard  from './../Card/ExerciseCard';
+
+const { Title } = Typography;
+
+
 
 function LandngPage() {
 
@@ -18,16 +24,17 @@ function LandngPage() {
 
     //rendering
     return (
-        <div style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'center'
-            ,width: '100%', height: '100vh'
-        }}>
-            <label>
-            <h1>{new Date().toLocaleTimeString()}</h1>
-            <h2>{title} </h2>
-            </label>
+        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+            <div style={{ 
+                textAlign: 'center' ,marginBottom: '0rem', border: '3px solid black',
+                borderRadius: "3rem", borderStyle: 'dotted' , margin: '10px'
+            }}>
+                <Title level={2} >{title} </Title>
+            </div>
+            <ExerciseCard/>
         </div>
     )
 }
+
 
 export default LandngPage
