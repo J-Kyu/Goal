@@ -58,6 +58,18 @@ app.post('/YearlyGoalRegister', (req, res) => {
   })
 })
 
+//get Alogrithm Data
+app.get('/api/GetAlgorithm/', (req,res) => {
+  SchemaAlgo.find(function(err, algo){
+    if(err)return res.status(500).send({
+      error: "database failure"
+    });
+    else{
+      res.json(algo);
+    }
+  })
+})
+
 //get from mongoDB example
 app.get('/api/YearlyGoal/:year', (req, res) =>{
   SchemaYearlyGoal.find({

@@ -12,13 +12,18 @@ const schemaAlgo = mongoose.Schema({
         default: "https://www.acmicpc.net/"
     },
     level: {
-        type: Number,
+        type: String,
         default: 0
     },
     probID: {
         type: Number,
         default: 0
+    },
+    isDone: {
+        type: Boolean,
+        default: false
     }
+
 })
 
 const SchemaAlgo = mongoose.model("SchemaAlgo", schemaAlgo);
