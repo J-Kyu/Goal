@@ -33,8 +33,9 @@ app.get('/', (req, res) => {
 //post router example
 app.post('/register', (req, res) => {
 
-  console.log(req.body)
-  const schemaAlgo = new SchemaAlgo(req.body)
+  console.log(req.body);
+
+  const schemaAlgo = new SchemaAlgo(req.body);
 
   schemaAlgo.save((err, algoInfo) => {
     if ( err ) return res.json({ success: false, err})
@@ -69,6 +70,16 @@ app.get('/api/GetAlgorithm/', (req,res) => {
     }
   })
 })
+
+//get algorithm from mongoDB whose isDone is false
+app.get('/api/GetNotDoneAlgoList',(req,res) => {
+  SchemaAlgo.find({
+    isDone: false
+  })
+  .then(algoList => res.status(200).json(algoList))
+
+})
+
 
 //get from mongoDB example
 app.get('/api/YearlyGoal/:year', (req, res) =>{

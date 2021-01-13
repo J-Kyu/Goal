@@ -1,6 +1,7 @@
 import { Typography } from 'antd'
-import { ExceptionMap } from 'antd/lib/result';
 import React from 'react'
+import AlgorithmContent from './AlgorithmContent';
+
 
 const { Title } = Typography;
 
@@ -11,8 +12,8 @@ function ExerciseCard() {
     return (
         <div style={{ width: '100%', maxWidth: "300px", textAlign: 'center' ,marginBottom: '0rem', border: '3px solid black', borderRadius: "3rem", borderStyle: 'dotted' }}>
             <Title level={3}>Titlle </Title>
-            <div style={{ display: 'inline-block', maxWidth: '100px', textAlign: 'center'}}>
-               {/* contents */}
+            <div style={{ display: 'inline-block', maxWidth: '1000px', textAlign: 'center'}}>
+               <AlgorithmContent/>
             </div>
         </div>
     )
