@@ -26,11 +26,11 @@ function AlgorithmContent() {
     //generate list of algo lines
     const renderLines = algoList.map((algo,index)=>{
       
-        return<Row gutter={4}>
+        return<Row gutter={4} key={algo._id}>
                 <div style={{ margin:"5px" }}>
                 <Space>
                     <Button type="primary">Confirm</Button>
-                    <a href={'/${algo.link}'}>{algo.title}</a>
+                    <a href={algo.link}>{algo.title}</a>
                     <span>{algo.level}</span>
                 </Space>
                 </div>
