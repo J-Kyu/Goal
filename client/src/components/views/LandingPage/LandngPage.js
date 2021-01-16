@@ -24,7 +24,7 @@ function LandngPage() {
 
     //rendering
     return (
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+        <div style={{ maxWidth: '1200px', margin: '2rem auto' }}>
             <div style={{ 
                 textAlign: 'center' ,marginBottom: '0rem', border: '3px solid black',
                 borderRadius: "3rem", borderStyle: 'dotted' , margin: '10px'

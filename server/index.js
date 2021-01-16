@@ -76,6 +76,14 @@ app.get('/api/GetNotDoneAlgoList',(req,res) => {
   SchemaAlgo.find({
     isDone: false
   })
+  .exec((err,algoList) => {
+    if(err) return res.status(400).send(err);
+    res.status(200).json({success: true,algoList})
+  })
+
+  SchemaAlgo.find({
+    isDone: false
+  })
   .then(algoList => res.status(200).json(algoList))
 
 })
