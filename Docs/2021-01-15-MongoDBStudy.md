@@ -66,4 +66,7 @@
       })
   ```
 
-  
+### [Mongo DB data 수정](https://www.zerocho.com/category/MongoDB/post/579e2821c097d015000404dc)
+
+* CRUD의 U 개념을 사용해서 Update 함수를 통해서 수정하여라.
+* 이 때 주의해야 하는 것은 ``$set``을 넣지 않고 수정하는 경우, 해당 data에 수정되는 부분만 남고 남머지는 다 날라갈 수 있다.

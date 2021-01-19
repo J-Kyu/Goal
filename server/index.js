@@ -4,6 +4,7 @@ const port = 5000
 const bodyParser = require('body-parser');
 const { SchemaAlgo } = require("./models/SchemaAlgo");
 const { SchemaYearlyGoal } = require("./models/SchemaYearlyGoal");
+// const { SchemaWeeklyGoal } = require("./models/SchemaWeeklyGoal");
 
 //verify whether current node is running as local or prooduction mode
 const config = require("./config/key");
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 })
 
 //post router example
-app.post('/register', (req, res) => {
+app.post('/registerAlgo', (req, res) => {
 
   console.log(req.body);
 
@@ -44,6 +45,21 @@ app.post('/register', (req, res) => {
     })
   })
 })
+
+// app.post('/registerWeekGoal', (req, res) => {
+
+//   console.log(rqe.body);
+
+//   const schemaWeeklyGoal = new SchemaWeeklyGoal(req.body);
+
+//   schemaWeeklyGoal.save((err, goalInfo) => {
+//     if ( err ) return res.json({ success: false, err})
+//     return res.status(200).json({
+//         success: true
+//     })
+//   })
+// })
+
 
 //post router example
 app.post('/YearlyGoalRegister', (req, res) => {
@@ -80,12 +96,6 @@ app.get('/api/GetNotDoneAlgoList',(req,res) => {
     if(err) return res.status(400).send(err);
     res.status(200).json({success: true,algoList})
   })
-
-  SchemaAlgo.find({
-    isDone: false
-  })
-  .then(algoList => res.status(200).json(algoList))
-
 })
 
 
@@ -101,6 +111,41 @@ app.get('/api/YearlyGoal/:year', (req, res) =>{
 app.get('/api/hello', (req,res) => {
   res.send("Hi Hello")
 })
+
+
+
+//update algo data states
+app.put('/api/confirmAlgoProb/', (req, res) => {
+
+  try{
+    console.log("PUT: "+req.body.id);
+
+    SchemaAlgo.findById(req.body.id, (err, algo) => {
+      //error check
+      if(err) return res.status(400).json({ success: false, error: "database failure"});
+      if(!algo) return res.status(404).json({ success: false, error: "Algo Not Found"});
+
+      //update
+      if(!algo.isDone) algo.isDone = true;
+
+      //save
+      algo.save( (err) => {
+        if(err) res.status(500).json({ success: false, error: "failed to update"});
+        res.json({ success: true});
+      })
+    })
+
+  }catch(err){
+    console.log("Error: Cannot Parse Parmeter: "+err)
+    console.log(req.body)
+  }
+
+  
+})
+
+
+
+
 
 //listening router
 app.listen(port, () => {
