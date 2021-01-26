@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-// const SchemaBook = mongoose.model("SchemaBook",schemaBook);
-const { SchemaBook } = require("./SchemaBook");
 
 const schemaWeeklyGoal = mongoose.Schema({
     title:{
@@ -24,7 +22,13 @@ const schemaWeeklyGoal = mongoose.Schema({
         type: Number,
         default: 0
     },
-    bookGoal: [SchemaBook]
+    bookId:{
+        type: mongoose.Schema.Types.ObjectId
+    },
+    bookProgress: {
+        type: Number,
+        defulat: 0
+    }
 });
 
 const SchemaWeeklyGoal = mongoose.model("ShcemaWeeklyGoal",schemaWeeklyGoal);

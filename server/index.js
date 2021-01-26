@@ -4,7 +4,8 @@ const port = 5000
 const bodyParser = require('body-parser');
 const { SchemaAlgo } = require("./models/SchemaAlgo");
 const { SchemaYearlyGoal } = require("./models/SchemaYearlyGoal");
-// const { SchemaWeeklyGoal } = require("./models/SchemaWeeklyGoal");
+const { SchemaBook } = require("./models/SchemaBook")
+const { SchemaWeeklyGoal } = require("./models/SchemaWeeklyGoal");
 
 //verify whether current node is running as local or prooduction mode
 const config = require("./config/key");
@@ -46,19 +47,33 @@ app.post('/registerAlgo', (req, res) => {
   })
 })
 
-// app.post('/registerWeekGoal', (req, res) => {
+app.post('/registerWeeklyGoal', (req, res) => {
 
-//   console.log(rqe.body);
+  console.log(req.body);
 
-//   const schemaWeeklyGoal = new SchemaWeeklyGoal(req.body);
+  const schemaWeeklyGoal = new SchemaWeeklyGoal(req.body);
 
-//   schemaWeeklyGoal.save((err, goalInfo) => {
-//     if ( err ) return res.json({ success: false, err})
-//     return res.status(200).json({
-//         success: true
-//     })
-//   })
-// })
+  schemaWeeklyGoal.save((err, goalInfo) => {
+    if ( err ) return res.json({ success: false, err})
+    return res.status(200).json({
+        success: true
+    })
+  })
+})
+
+app.post('/registerBook', (req, res) => {
+
+  console.log(req.body);
+
+  const schemaBook = new SchemaBook(req.body);
+
+  schemaBook.save((err, goalInfo) => {
+    if ( err ) return res.json({ success: false, err})
+    return res.status(200).json({
+        success: true
+    })
+  })
+})
 
 
 //post router example
