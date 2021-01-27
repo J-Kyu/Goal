@@ -102,6 +102,30 @@ app.get('/api/GetAlgorithm/', (req,res) => {
   })
 })
 
+app.get('/api/GetThisWeekBookInfo/', (req, res) => {
+
+  var bookId;
+
+  SchemaWeeklyGoal.find(function(err, wkGoal){
+    if(err) return res.status(500).send({
+      error: "Database Failure Cannot find Week Goal"
+    });
+    else{
+      console.log(wkGoal[0]);
+
+    SchemaBook.find({
+        _id: wkGoal[0].bookId
+      }).exec((err, book) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({success: true, book})
+      })
+    }
+  })
+
+
+
+})
+
 //get algorithm from mongoDB whose isDone is false
 app.get('/api/GetNotDoneAlgoList',(req,res) => {
   SchemaAlgo.find({

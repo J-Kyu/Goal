@@ -22,9 +22,7 @@ const schemaWeeklyGoal = mongoose.Schema({
         type: Number,
         default: 0
     },
-    bookId:{
-        type: mongoose.Schema.Types.ObjectId
-    },
+    bookId: mongoose.Schema.Types.ObjectId,
     bookProgress: {
         type: Number,
         defulat: 0
