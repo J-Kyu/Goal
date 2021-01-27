@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from 'react'
 import axios from 'axios';
 import { Typography } from 'antd';
 import  ExerciseCard  from './../Card/ExerciseCard';
+import WPAlgo from "./../Card/WPAlgo"
 
 const { Title } = Typography;
 
@@ -32,6 +33,7 @@ function LandngPage() {
                 <Title level={2} >{title} </Title>
             </div>
             <ExerciseCard/>
+            <WPAlgo/>
         </div>
     )
 }
