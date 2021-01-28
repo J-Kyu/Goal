@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Space, Col, Row} from 'antd';
 import axios from 'axios'
 
-
+import ExerciseCard from "./ExerciseCard"
 
 function AlgorithmContent() {
 
@@ -59,10 +59,12 @@ function AlgorithmContent() {
 
     //render page
     return (
-        <div style={{width:"100%" }}>
-            {renderLines}
-        </div>
-    )
+        <ExerciseCard children = {
+            <div style={{width:"100%" }}>
+                    {renderLines}
+            </div>
+        }/>
+   )
 }
 
 export default AlgorithmContent

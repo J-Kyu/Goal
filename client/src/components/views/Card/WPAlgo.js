@@ -15,9 +15,11 @@ const { Title } = Typography;
 
 function WPAlgo() {
     return (
-            <div>
-                <Progress type="circle" percent={75} />
-           </div>
+            <ExerciseCard children={
+                <div>
+                        <Progress type="circle" percent={75} />
+                </div>
+            }/>
     )
 }
 
