@@ -152,7 +152,14 @@ app.get('/api/hello', (req,res) => {
   res.send("Hi Hello")
 })
 
+app.get('/api/GetWeeklyAlgoProgressResult' , (req,res) => {
+  SchemaWeeklyGoal.find()
+  .exec((err, wkGoal) => {
+    if(err) return res.status(400).send(err);
+    res.status(200).json({success: true, wkGoal})
+  })
 
+})
 
 //update algo data states
 app.put('/api/confirmAlgoProb/', (req, res) => {

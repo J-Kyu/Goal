@@ -3,8 +3,7 @@
 import React from 'react'
 import axios from 'axios';
 
-import { Progress } from 'antd';
-import { Typography } from 'antd';
+import { Progress, Typography, Space } from 'antd';
 
 import ExerciseCard from "./ExerciseCard"
 
@@ -12,14 +11,18 @@ import ExerciseCard from "./ExerciseCard"
 const { Title } = Typography;
 
 
-
 function WPAlgo() {
+
+    //axios get wk progress and calculate
+
     return (
             <ExerciseCard children={
-                <div>
+                    <div style={{ margin: "5px" }}>
                         <Progress type="circle" percent={75} />
-                </div>
-            }/>
+                        <p>7/10</p>
+                    </div>
+
+           }/>
     )
 }
 
