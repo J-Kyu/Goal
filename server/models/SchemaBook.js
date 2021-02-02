@@ -7,9 +7,16 @@ const schemaBook = mongoose.Schema({
         maxLength: 50,
         defualt: "Book Name"
     },
-    pageNum: {
+    totalPageNum: {
         type: Number,
         default: 0
+    },
+    readPageNum:{
+        type: Number,
+        default: 0 
+    },
+    thumbnail:{
+        type: String
     },
     notionLink:{
         type: String,
