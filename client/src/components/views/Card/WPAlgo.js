@@ -35,6 +35,10 @@ function WPAlgo() {
                         <p>{curAlgoNum}/{goalAlgoNum}</p>
                     </div>
 
+           } title = {
+               <div>
+                    Algo Weekly Progress
+               </div>
            }/>
     )
 }

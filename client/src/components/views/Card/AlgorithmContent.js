@@ -63,6 +63,10 @@ function AlgorithmContent() {
             <div style={{width:"100%" }}>
                     {renderLines}
             </div>
+        } title = {
+            <div>
+                Algorithm
+            </div>
         }/>
    )
 }
