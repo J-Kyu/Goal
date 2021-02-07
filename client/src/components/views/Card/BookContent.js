@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Image } from 'antd';
+import { Button, Space, Image, InputNumber } from 'antd';
 import axios from 'axios'
 
 
@@ -11,7 +11,7 @@ function BookContent() {
     const [ bookNotionLink, setBookNotionLink ]  = useState();
     const [ bookThumbnailLink, setBookThumbnailLink ] = useState();
     const [ bookTitle, setBookTitle ] = useState();
-    const [random, setRandom] = useState();
+    const [ pageNum, setPageNum] = useState();
 
     useEffect(()=>{
         axios.get('/api/GetThisWeekBookInfo')
@@ -32,15 +32,23 @@ function BookContent() {
 
     },[])
 
+
+
+
     return (
         <div>
             <ExerciseCard children  = {
                 <div style={{ width: "100%" }}>
-                        <Image
-                            preview={true}
-                            src={bookThumbnailLink}
-                            width={200}
-                        />
+                    <Image
+                        preview={true}
+                        src={bookThumbnailLink}
+                        width={200} 
+                        style={{marginBottom:'10px'}}
+                    />
+                    <Space>
+                        <InputNumber min={1} max={100} defualtValue={20} />
+                        <Button type="primary" onClick={(e)=>alert({pageNum})}>Read</Button>
+                    </Space>
                 </div>
             } title = {
                 <div>
