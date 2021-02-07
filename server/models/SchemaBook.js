@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
+const DailyReadPage = mongoose.Schema({
+    date: { 
+        type: Date,
+        default: Date.now
+    },
+    readPage: {
+        type: Number,
+        default: 0
+    }
+})
 
 const schemaBook = mongoose.Schema({
     title: {
@@ -21,6 +31,10 @@ const schemaBook = mongoose.Schema({
     notionLink:{
         type: String,
         maxLenth: 50
+    },
+    dailyPage: {
+        type: [DailyReadPage],
+        default: ()=>  ({})
     }
 })
 
