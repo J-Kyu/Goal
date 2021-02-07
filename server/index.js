@@ -36,7 +36,6 @@ app.get('/', (req, res) => {
 //post router example
 app.post('/registerAlgo', (req, res) => {
 
-  console.log(req.body);
 
   const schemaAlgo = new SchemaAlgo(req.body);
 
@@ -50,7 +49,6 @@ app.post('/registerAlgo', (req, res) => {
 
 app.post('/registerWeeklyGoal', (req, res) => {
 
-  console.log(req.body);
 
   const schemaWeeklyGoal = new SchemaWeeklyGoal(req.body);
 
@@ -64,7 +62,6 @@ app.post('/registerWeeklyGoal', (req, res) => {
 
 app.post('/registerBook', (req, res) => {
 
-  console.log(req.body);
 
   const schemaBook = new SchemaBook(req.body);
 
@@ -80,7 +77,6 @@ app.post('/registerBook', (req, res) => {
 //post router example
 app.post('/YearlyGoalRegister', (req, res) => {
 
-  console.log(req.body)
   const schemaYearlyGoal = new SchemaYearlyGoal(req.body)
 
   schemaYearlyGoal.save((err, algoInfo) => {
@@ -112,14 +108,12 @@ app.get('/api/GetThisWeekBookInfo/', (req, res) => {
       error: "Database Failure Cannot find Week Goal"
     });
     else{
-      console.log(wkGoal[0]);
-
-    SchemaBook.find({
-        _id: wkGoal[0].bookId
-      }).exec((err, book) => {
-        if(err) return res.status(400).send(err);
-        res.status(200).json({success: true, book})
-      })
+      SchemaBook.find({
+          _id: wkGoal[0].bookId
+        }).exec((err, book) => {
+          if(err) return res.status(400).send(err);
+          res.status(200).json({success: true, book})
+        })
     }
   })
 
@@ -165,7 +159,6 @@ app.get('/api/GetWeeklyAlgoProgressResult' , (req,res) => {
 app.put('/api/confirmAlgoProb/', (req, res) => {
 
   try{
-    console.log("PUT: "+req.body.id);
 
     SchemaAlgo.findById(req.body.id, (err, algo) => {
       //error check
@@ -190,6 +183,35 @@ app.put('/api/confirmAlgoProb/', (req, res) => {
   
 })
 
+
+//update algo data states
+app.put('/api/readBook/', (req, res) => {
+
+  try{
+    console.log("PUT: "+req.body.bookId);
+
+    SchemaBook.findById(req.body.bookId, (err, book) => {
+      //error check
+      if(err) return res.status(400).json({ success: false, error: "database failure"});
+      if(!book) return res.status(404).json({ success: false, error: "Algo Not Found"});
+
+      //update
+      book.readPageNum = req.body.readPage;
+
+      //save
+      book.save( (err) => {
+        if(err) res.status(500).json({ success: false, error: "failed to update"});
+        res.json({ success: true});
+      })
+    })
+
+  }catch(err){
+    console.log("Error: Cannot Parse Parmeter: "+err)
+    console.log(req.body)
+  }
+
+  
+})
 
 
 

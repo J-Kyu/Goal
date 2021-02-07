@@ -11,28 +11,39 @@ function BookContent() {
     const [ bookNotionLink, setBookNotionLink ]  = useState();
     const [ bookThumbnailLink, setBookThumbnailLink ] = useState();
     const [ bookTitle, setBookTitle ] = useState();
-    const [ pageNum, setPageNum] = useState();
+    const [ readPage, setReadPage ] = useState();
+    const [ bookId, setBookId] = useState();
 
     useEffect(()=>{
         axios.get('/api/GetThisWeekBookInfo')
         .then( response => {
             if(response.data.success){
 
-                console.log(response.data.book[0].title)
-
+                setBookId(response.data.book[0]._id)
                 setBookThumbnailLink(response.data.book[0].thumbnail)
                 setBookNotionLink(response.data.book[0].notionLink)
                 setBookTitle(response.data.book[0].title)
 
-                console.log(bookNotionLink)
-                console.log(bookThumbnailLink)
-                console.log(bookTitle)
             }
         })
 
     },[])
 
 
+    function ActionButton(id,page,e){
+        e.preventDefault();
+        console.log(id+"\t: "+page);
+
+        axios({
+            method: 'put',
+            url: '/api/readBook',
+            data:{
+                bookId: id,
+                readPage: page
+            }
+        })
+
+    }
 
 
     return (
@@ -46,8 +57,8 @@ function BookContent() {
                         style={{marginBottom:'10px'}}
                     />
                     <Space>
-                        <InputNumber min={1} max={100} defualtValue={20} />
-                        <Button type="primary" onClick={(e)=>alert({pageNum})}>Read</Button>
+                        <InputNumber min={1} max={100} defualtValue={20} onChange={setReadPage} />
+                        <Button type="primary" onClick={(e)=> ActionButton(bookId,readPage,e)}>Read</Button>
                     </Space>
                 </div>
             } title = {
