@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const DailyReadPage = mongoose.Schema({
     date: { 
         type: Date,
-        default: Date.now
+        default: Date
     },
     readPage: {
         type: Number,
