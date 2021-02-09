@@ -134,16 +134,28 @@ app.get('/api/GetNotDoneAlgoList',(req,res) => {
 
 //test get
 app.get('/api/TestMethod', (req,res) => {
-
-  SchemaBook.findOne({
-     _id:"60219f2a03fdf00d5cf4051d",
-  })
-  .exec((err,book) => {
-    if(err) return res.status(400).send(err);
-
-    for(let i in book.dailyPage){
-      console.log(book.dailyPage[i].date("<YYYY-mm-dd>"));
+  SchemaBook.find({
+    //  _id:"60219f2a03fdf00d5cf4051d",
+    dailyPage: {
+      $elemMatch: {
+        _id: "60219f2a03fdf00d5cf4051e"
+      }
     }
+
+    //  dailyPage:{
+    //    $elemMatch:{
+    //      readPage: 0
+    //    }
+    //  }
+    })
+
+  .exec((err,book) => {
+    if(err) {
+      console.log(err)
+      return res.status(400).send(err);
+    }
+
+    console.log(book);
 
     return res.status(200).json({success: true})
   })
