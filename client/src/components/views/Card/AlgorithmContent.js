@@ -10,7 +10,7 @@ function AlgorithmContent() {
 
     //use router to load data from Mongo DB
     useEffect(() => {
-        axios.get('/api/GetNotDoneAlgoList')
+        axios.get('/api/algo/GetNotDoneAlgoList')
         .then(response => {
             if(response.data.success){
                 console.log(response.data);

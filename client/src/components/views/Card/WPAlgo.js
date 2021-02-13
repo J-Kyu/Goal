@@ -18,7 +18,7 @@ function WPAlgo() {
 
     //axios get wk progress and calculate
     useEffect(()=>{
-        axios.get('/api/GetWeeklyAlgoProgressResult')
+        axios.get('/api/weeklyGoal/GetWeeklyAlgoProgressResult')
         .then(response => {
             if(response.data.success){
                 setCurAlgoNum(response.data.wkGoal[0].algoProgress)

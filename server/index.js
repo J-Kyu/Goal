@@ -2,11 +2,11 @@ const express = require('express')
 const app = express()
 const port = 5000
 
-const bodyParser = require('body-parser');
-const { SchemaAlgo } = require("./models/SchemaAlgo");
+
 const { SchemaYearlyGoal } = require("./models/SchemaYearlyGoal");
-const { SchemaBook } = require("./models/SchemaBook")
-const { SchemaWeeklyGoal } = require("./models/SchemaWeeklyGoal");
+
+
+const bodyParser = require('body-parser');
 
 //verify whether current node is running as local or prooduction mode
 const config = require("./config/key");
@@ -16,6 +16,9 @@ const config = require("./config/key");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use('/api/algo', require('./router/algo'));
+app.use('/api/books/',require('./router/books'));
+app.use('/api/weeklyGoal/',require('./router/weeklyGoal'));
 //mongoDB
 const mongoose = require('mongoose');
 
@@ -33,45 +36,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!...')
 })
 
-//post router example
-app.post('/registerAlgo', (req, res) => {
-
-
-  const schemaAlgo = new SchemaAlgo(req.body);
-
-  schemaAlgo.save((err, algoInfo) => {
-    if ( err ) return res.json({ success: false, err})
-    return res.status(200).json({
-      success: true
-    })
-  })
-})
-
-app.post('/registerWeeklyGoal', (req, res) => {
-
-
-  const schemaWeeklyGoal = new SchemaWeeklyGoal(req.body);
-
-  schemaWeeklyGoal.save((err, goalInfo) => {
-    if ( err ) return res.json({ success: false, err})
-    return res.status(200).json({
-        success: true
-    })
-  })
-})
-
-app.post('/registerBook', (req, res) => {
-
-
-  const schemaBook = new SchemaBook(req.body);
-
-  schemaBook.save((err, goalInfo) => {
-    if ( err ) return res.json({ success: false, err})
-    return res.status(200).json({
-        success: true
-    })
-  })
-})
 
 
 //post router example
@@ -87,50 +51,7 @@ app.post('/YearlyGoalRegister', (req, res) => {
   })
 })
 
-//get Alogrithm Data
-app.get('/api/GetAlgorithm/', (req,res) => {
-  SchemaAlgo.find(function(err, algo){
-    if(err)return res.status(500).send({
-      error: "database failure"
-    });
-    else{
-      res.json(algo);
-    }
-  })
-})
 
-app.get('/api/GetThisWeekBookInfo/', (req, res) => {
-
-  var bookId;
-
-  SchemaWeeklyGoal.find(function(err, wkGoal){
-    if(err) return res.status(500).send({
-      error: "Database Failure Cannot find Week Goal"
-    });
-    else{
-      SchemaBook.find({
-          _id: wkGoal[0].bookId
-        }).exec((err, book) => {
-          if(err) return res.status(400).send(err);
-          res.status(200).json({success: true, book})
-        })
-    }
-  })
-
-
-
-})
-
-//get algorithm from mongoDB whose isDone is false
-app.get('/api/GetNotDoneAlgoList',(req,res) => {
-  SchemaAlgo.find({
-    isDone: false
-  })
-  .exec((err,algoList) => {
-    if(err) return res.status(400).send(err);
-    res.status(200).json({success: true,algoList})
-  })
-})
 
 //test get
 app.get('/api/TestMethod', (req,res) => {
@@ -141,14 +62,7 @@ app.get('/api/TestMethod', (req,res) => {
         _id: "60219f2a03fdf00d5cf4051e"
       }
     }
-
-    //  dailyPage:{
-    //    $elemMatch:{
-    //      readPage: 0
-    //    }
-    //  }
-    })
-
+  })
   .exec((err,book) => {
     if(err) {
       console.log(err)
@@ -169,77 +83,6 @@ app.get('/api/YearlyGoal/:year', (req, res) =>{
     year: req.params.year
   })
   .then(goal => res.status(200).json(goal))
-})
-
-//get router example ............ axios
-app.get('/api/hello', (req,res) => {
-  res.send("Hi Hello")
-})
-
-app.get('/api/GetWeeklyAlgoProgressResult' , (req,res) => {
-  SchemaWeeklyGoal.find()
-  .exec((err, wkGoal) => {
-    if(err) return res.status(400).send(err);
-    res.status(200).json({success: true, wkGoal})
-  })
-
-})
-
-//update algo data states
-app.put('/api/confirmAlgoProb/', (req, res) => {
-
-  try{
-
-    SchemaAlgo.findById(req.body.id, (err, algo) => {
-      //error check
-      if(err) return res.status(400).json({ success: false, error: "database failure"});
-      if(!algo) return res.status(404).json({ success: false, error: "Algo Not Found"});
-
-      //update
-      if(!algo.isDone) algo.isDone = true;
-
-      //save
-      algo.save( (err) => {
-        if(err) res.status(500).json({ success: false, error: "failed to update"});
-        res.json({ success: true});
-      })
-    })
-
-  }catch(err){
-    console.log("Error: Cannot Parse Parmeter: "+err)
-    console.log(req.body)
-  }
-})
-
-
-
-//update algo data states
-app.put('/api/readBook/', (req, res) => {
-
-  try{
-    console.log("PUT: "+req.body.bookId);
-
-    SchemaBook.findById(req.body.bookId, (err, book) => {
-      //error check
-      if(err) return res.status(400).json({ success: false, error: "database failure"});
-      if(!book) return res.status(404).json({ success: false, error: "Algo Not Found"});
-
-      //update
-      book.readPageNum = req.body.readPage;
-
-      //save
-      book.save( (err) => {
-        if(err) res.status(500).json({ success: false, error: "failed to update"});
-        res.json({ success: true});
-      })
-    })
-
-  }catch(err){
-    console.log("Error: Cannot Parse Parmeter: "+err)
-    console.log(req.body)
-  }
-
-  
 })
 
 

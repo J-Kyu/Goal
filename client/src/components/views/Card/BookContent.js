@@ -15,7 +15,7 @@ function BookContent() {
     const [ bookId, setBookId] = useState();
 
     useEffect(()=>{
-        axios.get('/api/GetThisWeekBookInfo')
+        axios.get('/api/books/GetThisWeekBookInfo')
         .then( response => {
             if(response.data.success){
 
