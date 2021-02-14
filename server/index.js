@@ -4,7 +4,7 @@ const port = 5000
 
 
 const { SchemaYearlyGoal } = require("./models/SchemaYearlyGoal");
-
+const { SchemaBook } = require('./models/SchemaBook');
 
 const bodyParser = require('body-parser');
 
@@ -54,13 +54,14 @@ app.post('/YearlyGoalRegister', (req, res) => {
 
 
 //test get
-app.get('/api/TestMethod', (req,res) => {
-  SchemaBook.find({
-    //  _id:"60219f2a03fdf00d5cf4051d",
-    dailyPage: {
-      $elemMatch: {
-        _id: "60219f2a03fdf00d5cf4051e"
-      }
+app.post('/api/TestReadPage', (req,res) => {
+  SchemaBook.updateOne(
+    {_id:"60219f2a03fdf00d5cf4051d"},
+    {$push: {
+        dailyPage:{
+          readPage: 200,
+          date: Date()
+        }
     }
   })
   .exec((err,book) => {
@@ -68,8 +69,6 @@ app.get('/api/TestMethod', (req,res) => {
       console.log(err)
       return res.status(400).send(err);
     }
-
-    console.log(book);
 
     return res.status(200).json({success: true})
   })
