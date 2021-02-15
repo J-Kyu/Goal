@@ -32,7 +32,7 @@ function AlgorithmContent() {
             //chang isDone to Done
             axios({
                 method: 'put',
-                url: '/api/confirmAlgoProb/',
+                url: '/api/algo/confirmAlgoProb/',
                 data:{
                     id: id
                 }

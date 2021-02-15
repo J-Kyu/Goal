@@ -5,6 +5,7 @@ import { Typography } from 'antd';
 import WPAlgo from "./../Card/WPAlgo"
 import AlgorithmContent from '../Card/AlgorithmContent';
 import BookContent from '../Card/BookContent';
+import WPBook from '../Card/WPBook';
 
 const { Title } = Typography;
 
@@ -37,6 +38,7 @@ function LandngPage() {
             <AlgorithmContent/>
             <WPAlgo/>
             <BookContent/>
+            <WPBook/>
         </div>
     )
 }

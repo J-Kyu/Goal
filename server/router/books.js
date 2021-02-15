@@ -60,8 +60,22 @@ router.put('/ReadBook/', (req, res) => {
     console.log("Error: Cannot Parse Parmeter: "+err)
     console.log(req.body)
   }
+})
 
-  
+
+
+router.get('/GetBookById/', (req,res) => {
+
+
+  SchemaBook.findById(req.body.id, (err, book) =>{
+    
+    if(err) return res.status(400).json({success: false, error: "database failure"})
+    if(!book) return res.status(404).json({ success: false, error: "Algo Not Found"})
+
+    console.log(book);
+    return res.status(200).json({success: true, book})
+  })
+
 })
 
 
