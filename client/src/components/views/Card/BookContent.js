@@ -23,7 +23,6 @@ function BookContent() {
                 setBookThumbnailLink(response.data.book[0].thumbnail)
                 setBookNotionLink(response.data.book[0].notionLink)
                 setBookTitle(response.data.book[0].title)
-                console.log(response.data.book);
             }
         })
 

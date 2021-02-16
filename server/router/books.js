@@ -64,15 +64,16 @@ router.put('/ReadBook/', (req, res) => {
 
 
 
-router.get('/GetBookById/', (req,res) => {
+router.get('/GetBookById/:bookId', (req,res) => {
 
-
-  SchemaBook.findById(req.body.id, (err, book) =>{
+  SchemaBook.findOne({
+     "_id": req.params.bookId
+    })
+    .exec((err,book) => {
     
     if(err) return res.status(400).json({success: false, error: "database failure"})
     if(!book) return res.status(404).json({ success: false, error: "Algo Not Found"})
 
-    console.log(book);
     return res.status(200).json({success: true, book})
   })
 

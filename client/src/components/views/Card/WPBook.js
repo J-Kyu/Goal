@@ -15,18 +15,14 @@ const { Title } = Typography;
 function WPBook() {
 
   const [ readPageList, setReadPageList ] = useState([]);
+  var bookId = "60219f2a03fdf00d5cf4051d" 
 
   useEffect(()=>{
-    axios({
-      method: 'get',
-      url: '/api/books/GetBookById',
-      data:{
-        id: "60219f2a03fdf00d5cf4051d"
-      }
-    })
+    axios.get('/api/books/GetBookById/'+bookId)
     .then( response => {
-      // setReadPageList(response.data.dailyPage)
-      // console.log(readPageList);
+      // console.log(typeof response.data.book.dailyPage);
+      setReadPageList(response.data.book.dailyPage)
+      console.log(readPageList);
     })
   },[])
 

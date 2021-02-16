@@ -13,7 +13,6 @@ function AlgorithmContent() {
         axios.get('/api/algo/GetNotDoneAlgoList')
         .then(response => {
             if(response.data.success){
-                console.log(response.data);
                 setAlgoList(response.data.algoList)
             }
             else{
