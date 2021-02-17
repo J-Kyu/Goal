@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-import { Typography, Space } from 'antd';
+import { Typography, Space,Row } from 'antd';
 import { Line } from '@ant-design/charts';
 
 import ExerciseCard from "./ExerciseCard"
@@ -22,12 +22,15 @@ function WPBook() {
     .then( response => {
       // console.log(typeof response.data.book.dailyPage);
       setReadPageList(response.data.book.dailyPage)
-      console.log(readPageList);
     })
   },[])
 
+  const dataList = readPageList.map((pages,index) => {
+    return [JSON.stringify({year:index, value:pages.readPage})]
+  })
+
      const data = [
-    { year: '1991', value1: 3 },
+    { year: '1991', value: 3 },
     { year: '1992', value: 4 },
     { year: '1993', value: 3.5 },
     { year: '1994', value: 5 },
@@ -39,7 +42,8 @@ function WPBook() {
   ];
   const config = {
     data,
-    height: 400,
+    // dataList,
+    height: 500,
     xField: 'year',
     yField: 'value',
     point: {
@@ -57,6 +61,8 @@ function WPBook() {
             <ExerciseCard children={
                     <div style={{ margin: "5px" }}>
                         <p><Line {...config} /></p>
+                      {/* <p>{dataList}</p> */}
+                      <p>{data}</p>
                     </div>
 
            } title = {
