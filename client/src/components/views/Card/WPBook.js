@@ -9,7 +9,6 @@ import { Line } from '@ant-design/charts';
 import ExerciseCard from "./ExerciseCard"
 
 
-const { Title } = Typography;
 
 
 function WPBook() {
@@ -21,7 +20,7 @@ function WPBook() {
     axios.get('/api/books/GetBookById/'+bookId)
     .then( response => {
       // console.log(typeof response.data.book.dailyPage);
-      setReadPageList(response.data.book.dailyPage)
+      setReadPageList(response.data.book.dailyPage);
     })
   },[])
 
@@ -42,8 +41,7 @@ function WPBook() {
   ];
   const config = {
     data,
-    // dataList,
-    height: 500,
+    height: 400,
     xField: 'year',
     yField: 'value',
     point: {
@@ -57,17 +55,18 @@ function WPBook() {
     },
   };
 
+    console.log("1\n"+dataList);
+    console.log("2\n"+data);
+
     return (
             <ExerciseCard children={
                     <div style={{ margin: "5px" }}>
-                        <p><Line {...config} /></p>
-                      {/* <p>{dataList}</p> */}
-                      <p>{data}</p>
+                        <Line {...config} />
                     </div>
 
            } title = {
                <div>
-                    Book Weekly Progress
+                    <p>Book Weekly Progress</p>
                </div>
            }/>
 
