@@ -19,14 +19,16 @@ function WPBook() {
   useEffect(()=>{
     axios.get('/api/books/GetBookById/'+bookId)
     .then( response => {
-      // console.log(typeof response.data.book.dailyPage);
-      setReadPageList(response.data.book.dailyPage);
+      //console.log(typeof response.data.book.dailyPage)
+      setReadPageList(response.data.book.dailyPage)
     })
   },[])
 
   const dataList = readPageList.map((pages,index) => {
-    return [JSON.stringify({year:index, value:pages.readPage})]
+    var obj = JSON.stringify({"year":index, "value":200})
+    return JSON.parse(obj)
   })
+
 
      const data = [
     { year: '1991', value: 3 },
@@ -55,8 +57,8 @@ function WPBook() {
     },
   };
 
-    console.log("1\n"+dataList);
-    console.log("2\n"+data);
+    console.log("1\n"+ dataList[0].year);
+    console.log("2\n"+data[0].year);
 
     return (
             <ExerciseCard children={
