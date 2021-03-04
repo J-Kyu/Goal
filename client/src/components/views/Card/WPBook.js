@@ -22,12 +22,15 @@ function WPBook() {
       //console.log(typeof response.data.book.dailyPage)
       setReadPageList(response.data.book.dailyPage)
     })
+
   },[])
 
-  const dataList = readPageList.map((pages,index) => {
-    var obj = JSON.stringify({"year":index, "value":200})
-    return JSON.parse(obj)
-  })
+    var dataList = readPageList.map((pages,index) => {
+      var obj = {year:"index", value:200}
+      // console.log(typeof JSON.parse(obj.year))
+      console.log("wow"+obj)
+      return JSON.parse(obj)
+    })
 
 
      const data = [
@@ -57,8 +60,7 @@ function WPBook() {
     },
   };
 
-    console.log("1\n"+ dataList[0].year);
-    console.log("2\n"+data[0].year);
+    // console.log("2\n"+(typeof data[0].value));
 
     return (
             <ExerciseCard children={
