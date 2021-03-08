@@ -13,24 +13,52 @@ import ExerciseCard from "./ExerciseCard"
 
 function WPBook() {
 
-  const [ readPageList, setReadPageList ] = useState([]);
+  const [ pageList, setPageList ] = useState([]);
   var bookId = "60219f2a03fdf00d5cf4051d" 
 
   useEffect(()=>{
     axios.get('/api/books/GetBookById/'+bookId)
     .then( response => {
       //console.log(typeof response.data.book.dailyPage)
-      setReadPageList(response.data.book.dailyPage)
+      if(response.data.success){
+        setPageList(response.data.book.dailyPage)
+      }
     })
 
   },[])
 
-    var dataList = readPageList.map((pages,index) => {
-      var obj = {year:"index", value:200}
-      // console.log(typeof JSON.parse(obj.year))
-      console.log("wow"+obj)
-      return JSON.parse(obj)
+    // const dataList = pageList.map((pages,index) => {
+    // //   var obj = {year:"index", value:200}
+    // //   // console.log(typeof JSON.parse(obj.year))
+    // //   console.log("wow"+obj)
+    // //   return JSON.parse(obj)
+
+    //   return <Space key = {index}>
+    //         <span>
+    //           {index} |
+    //           {pages.readPageList} \
+    //         </span>
+
+    //         </Space>
+    // })
+
+    const dataList = pageList.map((page,index)=>{
+      // var obj = {year:"index", value:200}
+      // // console.log(typeof JSON.parse(obj.year))
+      // console.log("wow"+obj)
+      // return JSON.parse(obj)
+
+
+
+        return<Row gutter={4} key={page._id}>
+                <div style={{ margin:"5px" }}>
+                <Space>
+                    <span>{page.readPage}</span>
+                </Space>
+                </div>
+            </Row>
     })
+
 
 
      const data = [
@@ -66,6 +94,7 @@ function WPBook() {
             <ExerciseCard children={
                     <div style={{ margin: "5px" }}>
                         <Line {...config} />
+                        a{dataList}a
                     </div>
 
            } title = {
