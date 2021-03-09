@@ -14,6 +14,7 @@ import ExerciseCard from "./ExerciseCard"
 function WPBook() {
 
   const [ pageList, setPageList ] = useState([]);
+  const data = [{year: '2012',value: 10},{year:'2013',value: 11}]
   var bookId = "60219f2a03fdf00d5cf4051d" 
 
   useEffect(()=>{
@@ -22,56 +23,34 @@ function WPBook() {
       //console.log(typeof response.data.book.dailyPage)
       if(response.data.success){
         setPageList(response.data.book.dailyPage)
-      }
+
+            }
     })
 
   },[])
 
-    // const dataList = pageList.map((pages,index) => {
-    // //   var obj = {year:"index", value:200}
-    // //   // console.log(typeof JSON.parse(obj.year))
-    // //   console.log("wow"+obj)
-    // //   return JSON.parse(obj)
 
-    //   return <Space key = {index}>
-    //         <span>
-    //           {index} |
-    //           {pages.readPageList} \
-    //         </span>
-
-    //         </Space>
-    // })
-
-    const dataList = pageList.map((page,index)=>{
-      // var obj = {year:"index", value:200}
-      // // console.log(typeof JSON.parse(obj.year))
-      // console.log("wow"+obj)
-      // return JSON.parse(obj)
+  for(let i = 0; i < pageList.length; i++){
+    data.push({year: ''+i, value: pageList[i].readPage})
+  }
+  console.log(data)
 
 
 
-        return<Row gutter={4} key={page._id}>
-                <div style={{ margin:"5px" }}>
-                <Space>
-                    <span>{page.readPage}</span>
-                </Space>
-                </div>
-            </Row>
-    })
+  //    const data = [
+  //   { year: '1991', value: 3 },
+  //   { year: '1992', value: 4 },
+  //   { year: '1993', value: 3.5 },
+  //   { year: '1994', value: 5 },
+  //   { year: '1995', value: 4.9 },
+  //   { year: '1996', value: 6 },
+  //   { year: '1997', value: 7 },
+  //   { year: '1998', value: 9 },
+  //   { year: '1999', value: 13 },
+  // ];
 
+// console.log(data)
 
-
-     const data = [
-    { year: '1991', value: 3 },
-    { year: '1992', value: 4 },
-    { year: '1993', value: 3.5 },
-    { year: '1994', value: 5 },
-    { year: '1995', value: 4.9 },
-    { year: '1996', value: 6 },
-    { year: '1997', value: 7 },
-    { year: '1998', value: 9 },
-    { year: '1999', value: 13 },
-  ];
   const config = {
     data,
     height: 400,
@@ -88,13 +67,11 @@ function WPBook() {
     },
   };
 
-    // console.log("2\n"+(typeof data[0].value));
 
     return (
             <ExerciseCard children={
                     <div style={{ margin: "5px" }}>
-                        <Line {...config} />
-                        a{dataList}a
+                    <Line {...config} />
                     </div>
 
            } title = {
